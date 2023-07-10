@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.1 <4.0.0'
+  sdk: '>=2.19.4 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   dio: ^5.1.2
-  syncfusion_flutter_calendar: ^21.2.6
+  syncfusion_flutter_calendar: ^21.2.3
   syncfusion_localizations: ^21.1.35
 
 dev_dependencies:

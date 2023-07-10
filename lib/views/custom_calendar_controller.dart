@@ -20,9 +20,7 @@ class CustomCalendarController extends GetxController {
     // TODO: implement onInit
     colorCollection = [];
     random = Random();
-
-    dataSource = AppointmentDataSource(_getDataSourceAppointments());
-
+    dataSource = AppointmentDataSource([]);
     super.onInit();
   }
 
@@ -35,22 +33,29 @@ class CustomCalendarController extends GetxController {
           DateTime.now().year,
           DateTime.now().month,
           DateTime.now().day,
-          9,
+          9, //Hora inicio
         ),
         endTime: DateTime(
           DateTime.now().year,
           DateTime.now().month,
           DateTime.now().day,
-          11,
+          11, //Hora fin
         ),
         subject: 'Scrum meeting',
       ),
     ];
   }
+
+  saveSchedule() {
+    try {
+      dataSource = AppointmentDataSource(_getDataSourceAppointments());
+      update();
+    } catch (error) {
+      print(error);
+    }
+  }
 }
 
-/// An object to set the appointment collection data source to collection, and
-/// allows to add, remove or reset the appointment collection.
 class AppointmentDataSource extends CalendarDataSource {
   AppointmentDataSource(this.source);
 

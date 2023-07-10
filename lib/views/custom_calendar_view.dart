@@ -33,34 +33,48 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   Widget build(BuildContext context) {
     return GetBuilder<CustomCalendarController>(
       init: CustomCalendarController(),
-      builder: (controller) => SfCalendar(
-        backgroundColor: Colors.white,
-        showDatePickerButton: true,
-        showNavigationArrow: true,
-        viewNavigationMode: ViewNavigationMode.none,
-        allowAppointmentResize: true,
-        allowViewNavigation: true,
-
-        view: CalendarView.week,
-        //monthViewSettings: MonthViewSettings(showAgenda: true),
-        allowedViews: controller.allowedViews,
-        //MeetingDataSource(_getDataSource()),
-        dataSource: controller.dataSource,
-        onTap: (calendarDetails) {
-          _onCalendarTapped(calendarDetails, controller);
-        },
-        monthViewSettings: const MonthViewSettings(
-          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-          monthCellStyle: MonthCellStyle(
-              //leadingDatesBackgroundColor: Colors.red,
-              //todayBackgroundColor: Colors.red,
+      builder: (controller) => Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: controller.saveSchedule,
+              child: const Text("Nueva visita"),
+            ),
+           
+            Expanded(
+              child: SfCalendar(
+                backgroundColor: Colors.white,
+                showDatePickerButton: true,
+                showNavigationArrow: true,
+                viewNavigationMode: ViewNavigationMode.none,
+                allowAppointmentResize: true,
+                allowViewNavigation: true,
+      
+                view: CalendarView.week,
+                //monthViewSettings: MonthViewSettings(showAgenda: true),
+                allowedViews: controller.allowedViews,
+                //MeetingDataSource(_getDataSource()),
+                dataSource: controller.dataSource,
+                onTap: (calendarDetails) {
+                  _onCalendarTapped(calendarDetails, controller);
+                },
+                monthViewSettings: const MonthViewSettings(
+                  appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+                  monthCellStyle: MonthCellStyle(
+                      //leadingDatesBackgroundColor: Colors.red,
+                      //todayBackgroundColor: Colors.red,
+                      ),
+                ),
+      
+                timeSlotViewSettings: const TimeSlotViewSettings(
+                  startHour: 0,
+                  endHour: 24,
+                  nonWorkingDays: <int>[DateTime.saturday, DateTime.sunday],
+                ),
               ),
-        ),
-
-        timeSlotViewSettings: const TimeSlotViewSettings(
-          startHour: 0,
-          endHour: 24,
-          nonWorkingDays: <int>[DateTime.saturday, DateTime.sunday],
+            ),
+          ],
         ),
       ),
     );
